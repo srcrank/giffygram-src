@@ -1,20 +1,24 @@
 import { getUsers, getPosts } from "./data/dataManager.js"
 import { PostList } from "./feed/postList.js"
-/**
- * Main logic module for what should happen on initial page load for Giffygram
- */
+import { NavBar } from "./nav/navBar.js"
+import { footer } from "./footer/footer.js"
 
-//Get a reference to the location on the DOM where the app will display
+
 let postElement = document.querySelector(".postList");
-let navElement = document.querySelector("nav");
+let navElement = document.querySelector(".nav");
 let entryElement = document.querySelector(".entryForm")
 
-/*
-    This function performs one, specific task.
 
-    1. Can you explain what that task is?
-    2. Are you defining the function here or invoking it?
-*/
+const showNavBar = () => {
+    const navElement = document.querySelector("nav");
+	navElement.innerHTML = NavBar();
+}
+
+const showFooter = () => {
+    //Get a reference to the location on the DOM where the nav will display
+    const footerElement = document.querySelector("footer");
+	footerElement.innerHTML = footer();
+}
 
 getUsers()
 .then(data => {
@@ -29,7 +33,9 @@ const showPostList = () => {
 }
 
 const startGiffyGram = () => {
-	showPostList();
+	showNavBar();
+    showPostList();
+    showFooter();
 }
 // Are you defining the function here or invoking it?
 startGiffyGram();
