@@ -1,4 +1,5 @@
-import { getUsers } from "./data/dataManager.js"
+import { getUsers, getPosts } from "./data/dataManager.js"
+import { PostList } from "./feed/postList.js"
 /**
  * Main logic module for what should happen on initial page load for Giffygram
  */
@@ -14,13 +15,21 @@ let entryElement = document.querySelector(".entryForm")
     1. Can you explain what that task is?
     2. Are you defining the function here or invoking it?
 */
-const startGiffyGram = () => {
-	postElement.innerHTML = "Hello Cohort 47"
-}
-// Are you defining the function here or invoking it?
-startGiffyGram();
 
 getUsers()
 .then(data => {
     console.log("User Data", data)
 })
+
+const showPostList = () => {
+    const postElement = document.querySelector(".postList");
+    getPosts().then((allPosts) => {
+        postElement.innerHTML  = PostList(allPosts);
+    })
+}
+
+const startGiffyGram = () => {
+	showPostList();
+}
+// Are you defining the function here or invoking it?
+startGiffyGram();
